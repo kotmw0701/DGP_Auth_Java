@@ -18,7 +18,7 @@ public class Main {
 	static int roop = 1;
 	
 	public static void main(String... args) {
-		discordclient = getClient("MzQ1MTE0MTQzNDQ1MjIxMzg2.DG4TSA.Apf-NP5-YZLQTKBiJ_O2DDGypKg", true);
+		discordclient = getClient("token", true);
 		EventDispatcher dispatcher = discordclient.getDispatcher();
 		dispatcher.registerListener(new EventListener());
 		BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
