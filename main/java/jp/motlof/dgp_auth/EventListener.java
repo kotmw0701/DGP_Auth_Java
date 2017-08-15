@@ -52,7 +52,10 @@ public class EventListener {
 		if(nickname == null)
 			nickname = "DGP_Auth";
 		if(e.getMessage().getContent().matches(".*"+nickname+"(ちゃん|ちゃーん|さん|さーん|くん|くーん).*") || isMention(e.getMessage())) {
-			if(e.getMessage().getContent().contains("判定お願い")) {
+			if(e.getMessage().getContent().contains("どっち？")) {
+				e.getChannel().sendMessage("Javaで動いてるよ～");
+				return;
+			} else if(e.getMessage().getContent().contains("判定お願い")) {
 				count.put(e.getGuild().getLongID(), 0);
 				e.getChannel().setTypingStatus(true);
 				String users = "文字列が規定を越していないのは \r\n ```";
@@ -72,6 +75,15 @@ public class EventListener {
 				e.getChannel().sendMessage(users);
 				e.getChannel().setTypingStatus(false);
 				return;
+			} else if(e.getMessage().getContent().contains("お疲れ様")) {
+				if(e.getMessage().getAuthor().getLongID() == 190468887593222144L) {
+					e.getMessage().getChannel().sendMessage("お疲れ～、またね～ \r\n(判定プログラムを終了しました)");
+					Main.discordclient.logout();
+					System.exit(0);
+					return;
+				}
+				e.getMessage().getChannel().sendMessage("お疲れ～");
+				return;
 			}
 			int i = 0;
 			if(count.containsKey(e.getGuild().getLongID()))
@@ -86,20 +98,6 @@ public class EventListener {
 			count.put(e.getGuild().getLongID(), i);
 		}
 	}
-	/*
-	 * 
-	 * else if(e.getMessage().getContent().contains("お疲れ様")) {
-				if(e.getMessage().getAuthor().getLongID() == 190468887593222144L) {
-					e.getMessage().getChannel().sendMessage("お疲れ～、またね～ \r\n(判定プログラムを終了しました)");
-					Main.discordclient.logout();
-					System.exit(0);
-					return;
-				}
-				e.getMessage().getChannel().sendMessage("お疲れ～");
-				return;
-			}
-	 * 
-	 */
 	
 	private String getSeparatorMessage(String... msgs) {
 		String separator = "\r\n";
