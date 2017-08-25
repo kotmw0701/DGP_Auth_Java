@@ -24,26 +24,26 @@ public class Main {
 		BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
 		while(true) {
 			try {
-					String text = reader.readLine();
-					if(text.isEmpty())
-						continue;
-					if(text.startsWith("%stop")) {
-						System.exit(0);
-						discordclient.logout();
-					} else if(text.startsWith("%remove")) {
-						if(text.split(" ").length == 3) {
-							long channnelid = Long.parseLong(text.split(" ")[1]);
-							long userid = Long.parseLong(text.split(" ")[2]);
-							for(IMessage imessage : discordclient.getChannelByID(channnelid).getMessageHistory()) {
-								if(imessage.getAuthor().getLongID() == userid)
-									imessage.delete();
-							}
-							continue;
-						} else if(text.split(" ").length == 2) {
-							long msgid = Long.parseLong(text.split(" ")[1]);
-							discordclient.getMessageByID(msgid).delete();
+				String text = reader.readLine();
+				if(text.isEmpty())
+					continue;
+				if(text.startsWith("%stop")) {
+					System.exit(0);
+					discordclient.logout();
+				} else if(text.startsWith("%remove")) {
+					if(text.split(" ").length == 3) {
+						long channnelid = Long.parseLong(text.split(" ")[1]);
+						long userid = Long.parseLong(text.split(" ")[2]);
+						for(IMessage imessage : discordclient.getChannelByID(channnelid).getMessageHistory()) {
+							if(imessage.getAuthor().getLongID() == userid)
+								imessage.delete();
 						}
+						continue;
+					} else if(text.split(" ").length == 2) {
+						long msgid = Long.parseLong(text.split(" ")[1]);
+						discordclient.getMessageByID(msgid).delete();
 					}
+				}
 			} catch (DiscordException | IOException | MissingPermissionsException | RateLimitException e) {
 				e.printStackTrace();
 				continue;
